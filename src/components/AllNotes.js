@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Note from './Note'
+import { connect } from 'react-redux'
 
-const AllNotes = () => {
-
-    const [allNotes, setAllNotes] = useState([])
-
+const AllNotes = ({ all_notes, toggleImportantNotes, dispatch }) => {
+    console.log(dispatch);
     return (
         <div className="my-3">
             <h5>All Notes</h5>
-            {
-                allNotes.map((note) => <Note data={note} key={note.id} />)
-            }
+            <div className="row ">
+                {
+                    all_notes.map((note) => <Note data={note} key={note.id} toggleImportantNotes={toggleImportantNotes} />)
+                }
+            </div>
         </div>
     )
 }
 
-export default AllNotes
+
+
+const mapStateToProps = state => ({
+    all_notes: state.all_notes
+})
+export default connect(mapStateToProps)(AllNotes)

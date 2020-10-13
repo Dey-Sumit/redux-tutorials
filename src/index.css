@@ -5,8 +5,13 @@
 body {
     background-color: #221e1e;
     color: aliceblue;
+
 }
 
 .container {
     padding: 3vh;
+}
+
+hr {
+    background-color: aliceblue;
 }
