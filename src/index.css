@@ -3,15 +3,42 @@
 }
 
 body {
-    background-color: #221e1e;
-    color: aliceblue;
-
-}
-
-.container {
-    padding: 3vh;
+    background-color: #373637;
+    color: #FF4C0D;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 hr {
-    background-color: aliceblue;
+    background-color: #ca04ec;
+}
+
+.importantNotes {
+    color: #ca04ec;
+}
+
+.importantNotes .btn:hover {
+    background: #ca04ec;
+    color: #fff;
+    border: 1px solid #ca04ec;
+    outline: none;
+}
+
+.card {
+    background: transparent !important;
+    box-shadow: 5px 5px 8px #1e1d1e,
+        -5px -5px 8px #484748;
+}
+
+.btn {
+    background: transparent;
+    color: inherit;
+    border: 1px solid;
+    outline: none;
+}
+
+.btn:hover {
+    background: #FF4C0D;
+    color: #fff;
+    border: 1px solid #FF4C0D;
+    outline: none;
 }

@@ -1,23 +1,84 @@
-import store from "../store"
+import { db } from "../../firebase"
 
 export const add_new_note = (data) => {
-    return (dispatch) => {
-        // do some api calls,database query
-        //  then prepare the data and use that data as payload
-        dispatch({
-            type: "ADD_NOTE",
-            payload: data
-        })
+    return async (dispatch) => {
+
+        try {
+            dispatch({
+                type: "SET_LOADER"
+            })
+            // add new note in DB
+            console.log(data.id);
+            await db.collection('notes').doc(data.id.toString()).set(data)
+
+            // get all the notes from db
+            const snapshot = await db.collection('notes').get()
+
+            // console.log(snapshot);
+
+            // prepare the data
+            const all_notes = snapshot.docs.map(doc => doc.data())
+
+            // dispatch
+            dispatch({
+                type: "ADD_NOTE_SUCCESS",
+                payload: all_notes
+            })
+
+        } catch (error) {
+            console.log(error);
+            // dispatch
+            dispatch({
+                type: "ADD_NOTE_FAILURE",
+                payload: error.message
+            })
+        }
+
     }
 }
 
+export const load_data = () => async dispatch => {
+    dispatch({
+        type: "SET_LOADER"
+    })
+    try {
 
-export const toggleImportantNotes = (note_id) => dispatch => {
-    // some db stuff
-    dispatch(
-        {
-            type: "TOGGLE_IMPORTANT_NOTE",
-            payload: note_id
-        }
-    )
+        const snapshot = await db.collection('notes').get()
+
+        // console.log(snapshot);
+
+        // prepare the data
+        const all_notes = snapshot.docs.map(doc => doc.data())
+
+        // dispatch
+        dispatch({
+            type: "ADD_NOTE_SUCCESS",
+            payload: all_notes
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const toggleImportantNotes = (note_id) => async dispatch => {
+    dispatch({
+        type: "SET_LOADER"
+    })
+    try {
+
+        const snapshot = db.collection('notes').doc(note_id.toString())
+
+        const note = (await snapshot.get()).data();
+
+        await snapshot.update({
+            isImportant: !note.isImportant
+        })
+
+        dispatch(load_data())
+
+    } catch (error) {
+        console.log(error);
+    }
+
 }

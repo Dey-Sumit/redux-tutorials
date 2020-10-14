@@ -1,14 +1,7 @@
 const initialState = {
-    all_notes: [{
-        id: 1,
-        body: "I am a good note :)",
-        date: '10/11/20'
-    },
-    {
-        id: 2,
-        body: "I am a bad note :)",
-        date: '20/01/30'
-    }],
+    all_notes: [],
+    loading: false,
+    errorMessage: null
 
 }
 
@@ -17,24 +10,37 @@ const initialState = {
 const reducer = (previousState = initialState, action) => {
     const { type, payload } = action
     switch (type) {
-        case "ADD_NOTE":
+        case "SET_LOADER":
             return {
                 ...previousState,
-                all_notes: [...previousState.all_notes, payload]
+                loading: true
             }
-        case "TOGGLE_IMPORTANT_NOTE":
-            const new_all_notes = previousState.all_notes.slice() // duplicate array
-            const index = new_all_notes.findIndex(note => note.id === payload)
-            const note = new_all_notes[index];
-            const newNote = {
-                ...note,
-                isImportant: !note.isImportant
-            }
-            new_all_notes[index] = newNote
+        case "ADD_NOTE_SUCCESS":
             return {
                 ...previousState,
-                all_notes: new_all_notes
+                all_notes: payload,
+                loading: false
             }
+        case "ADD_NOTE_FAILURE":
+            return {
+                ...previousState,
+                errorMessage: payload,
+                loading: false
+
+            }
+        // case "TOGGLE_IMPORTANT_NOTE":
+        //     const new_all_notes = previousState.all_notes.slice() // duplicate array
+        //     const index = new_all_notes.findIndex(note => note.id === payload)
+        //     const note = new_all_notes[index];
+        //     const newNote = {
+        //         ...note,
+        //         isImportant: !note.isImportant
+        //     }
+        //     new_all_notes[index] = newNote
+        //     return {
+        //         ...previousState,
+        //         all_notes: new_all_notes
+        //     }
         default:
             return previousState
     }

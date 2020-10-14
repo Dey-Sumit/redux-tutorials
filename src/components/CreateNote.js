@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { add_new_note } from '../redux/actions/notes.action'
 const CreateNote = ({ add_new_note }) => {
-    console.log(add_new_note);
+
     const [note, setNote] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()

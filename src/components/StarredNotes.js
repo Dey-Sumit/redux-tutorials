@@ -4,7 +4,7 @@ import Note from './Note'
 
 const StarredNotes = ({ allNotes }) => {
     return (
-        <div>
+        <div className="importantNotes">
             <h4>Important Notes</h4>
             <div className="row">
                 {

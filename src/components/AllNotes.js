@@ -3,7 +3,7 @@ import Note from './Note'
 import { connect } from 'react-redux'
 
 const AllNotes = ({ all_notes, toggleImportantNotes, dispatch }) => {
-    console.log(dispatch);
+
     return (
         <div className="my-3">
             <h5>All Notes</h5>
