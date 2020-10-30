@@ -8,21 +8,21 @@ export const add_new_note = (data) => {
                 type: "SET_LOADER"
             })
             // add new note in DB
-            console.log(data.id);
+
             await db.collection('notes').doc(data.id.toString()).set(data)
 
-            // get all the notes from db
-            const snapshot = await db.collection('notes').get()
+            // // get all the notes from db
+            // const snapshot = await db.collection('notes').get()
 
-            // console.log(snapshot);
+            // // console.log(snapshot);
 
-            // prepare the data
-            const all_notes = snapshot.docs.map(doc => doc.data())
+            // // prepare the data
+            // const all_notes = snapshot.docs.map(doc => doc.data())
 
             // dispatch
             dispatch({
-                type: "ADD_NOTE_SUCCESS",
-                payload: all_notes
+                type: "ADD_NOTE",
+                payload: data
             })
 
         } catch (error) {
@@ -52,7 +52,7 @@ export const load_data = () => async dispatch => {
 
         // dispatch
         dispatch({
-            type: "ADD_NOTE_SUCCESS",
+            type: "LOAD_NOTES",
             payload: all_notes
         })
 

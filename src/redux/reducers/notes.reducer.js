@@ -2,9 +2,7 @@ const initialState = {
     all_notes: [],
     loading: false,
     errorMessage: null
-
 }
-
 
 // reducer returns a new state
 const reducer = (previousState = initialState, action) => {
@@ -15,10 +13,10 @@ const reducer = (previousState = initialState, action) => {
                 ...previousState,
                 loading: true
             }
-        case "ADD_NOTE_SUCCESS":
+        case "ADD_NOTE":
             return {
                 ...previousState,
-                all_notes: payload,
+                all_notes: [...previousState.all_notes, payload],
                 loading: false
             }
         case "ADD_NOTE_FAILURE":
@@ -26,7 +24,12 @@ const reducer = (previousState = initialState, action) => {
                 ...previousState,
                 errorMessage: payload,
                 loading: false
-
+            }
+        case "LOAD_NOTES":
+            return {
+                ...previousState,
+                all_notes: payload,
+                loading: false
             }
         // case "TOGGLE_IMPORTANT_NOTE":
         //     const new_all_notes = previousState.all_notes.slice() // duplicate array

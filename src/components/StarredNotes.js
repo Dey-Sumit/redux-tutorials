@@ -12,7 +12,6 @@ const StarredNotes = ({ allNotes }) => {
                         .map(note => <Note data={note} key={note.id} />)
                 }
             </div>
-
         </div>
     )
 }

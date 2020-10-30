@@ -6,6 +6,9 @@ import CreateNote from './components/CreateNote'
 import StarredNotes from './components/StarredNotes'
 import { load_data } from './redux/actions/notes.action'
 import store from './redux/store'
+
+
+
 const App = ({ loading }) => {
     useEffect(() => {
         store.dispatch(load_data())
